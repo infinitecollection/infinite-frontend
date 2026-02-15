@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Infinite Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ===== GOOGLE FONT FEEL ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #eef2f7, #d9e4f5);
+  color: #333;
+}
+
+/* ================= HEADER ================= */
+.header {
+  background: linear-gradient(90deg, #141e30, #243b55);
+  padding: 14px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.header h2 {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* NAV BOX BUTTONS */
+.header nav {
+  display: flex;
+  gap: 12px;
+}
+
+.header nav a {
+  text-decoration: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(6px);
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.header nav a:hover {
+  background: #ff9800;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* ================= LAYOUT ================= */
+.main-container {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* ================= FILTER PANEL (UPGRADED) ================= */
+.filters {
+  width: 240px;
+  padding: 18px;
+  border-radius: 16px;
+
+  /* NEW PREMIUM BACKGROUND */
+  background: linear-gradient(145deg, #D6E6EF, #D6E6EF);
+
+  /* SOFT DEPTH SHADOW */
+  box-shadow: 
+    8px 8px 18px rgba(0,0,0,0.08),
+    -8px -8px 18px rgba(255,255,255,0.9);
+
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* FILTER TITLES */
+.filters h3 {
+  margin-bottom: 12px;
+  color: #243b55;
+  font-size: 16px;
+  font-weight: 600;
+  border-left: 5px solid #ff5722;
+  padding-left: 10px;
+}
+
+/* CATEGORY BUTTONS */
+.cat-btn {
+  width: 100%;
+  padding: 9px;
+  margin: 6px 0;
+  border-radius: 8px;
+  border: none;
+  background: #f1f3f8;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.cat-btn:hover {
+  background: #243b55;
+  color: white;
+}
+
+.cat-btn.active {
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  color: white;
+  font-weight: 600;
+}
+
+/* FILTER PRICE BUTTONS */
+.filter button {
+  width: 100%;
+  margin: 5px 0;
+  padding: 7px;
+  border-radius: 8px;
+  border: none;
+  background: #e3e9f3;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.filter button:hover {
+  background: #ff9800;
+  color: rgb(255, 255, 255);
+}
+
+/* ================= PRODUCTS GRID ================= */
+.products {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+/* ================= PRODUCT CARD ================= */
+.product-card {
+  background: white;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.3s ease;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* PRODUCT TITLE */
+.product-card h4 {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* PRICE */
+.price {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.selling-price {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.mrp {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 13px;
+}
+
+.discount {
+  color: #2e7d32;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* BUTTON GROUP */
+.btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+/* COMMON BTN */
+.btn {
+  flex: 1;
+  padding: 9px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* VIEW DETAILS */
+.view-btn {
+  background: linear-gradient(90deg, #ff512f, #dd2476);
+  color: white;
+}
+
+.view-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(221,36,118,0.4);
+}
+
+/* BUY BUTTON */
+.buy-btn {
+  background: linear-gradient(90deg, #00c853, #64dd17);
+  color: white;
+}
+
+.buy-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,200,83,0.4);
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width: 900px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .filters {
+    width: 100%;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h2>Infinite Store</h2>
+
+  <nav>
+    <a href="cart.html">Cart</a>
+    <a href="profile.html">Profile</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </nav>
+</div>
+
+<!-- MAIN -->
+<div class="main-container">
+
+  <!-- FILTERS -->
+  <!-- FILTERS -->
+<div class="filters">
+  <h3>Categories</h3>
+
+  <button class="cat-btn active" onclick="setActive(this); filterCategory('All')">All</button>
+  <button class="cat-btn" onclick="setActive(this); filterCategory('Tshirt')">Tshirt</button>
+  <button class="cat-btn" onclick="setActive(this); filterCategory('Pants')">Pants</button>
+  <button class="cat-btn" onclick="setActive(this); filterCategory('Shirt')">Shirt</button>
+  <button class="cat-btn" onclick="setActive(this); filterCategory('Airpods')">Airpods</button>
+  <button class="cat-btn" onclick="setActive(this); filterCategory('Trackpants')">Trackpants</button>
+  <button class="cat-btn" onclick="setActive(this); filterCategory('Hoodies')">Hoodies</button>
+  <button class="cat-btn" onclick="setActive(this); filterCategory('Shoes')">Shoes</button>
+  <button class="cat-btn" onclick="setActive(this); filterCategory('Accessories')">Accessories</button>
+  <button class="cat-btn" onclick="setActive(this); filterCategory('Watches')">Watches</button>
+
+  <h3>Price</h3>
+  <div class="filter">
+    <button onclick="sortPrice('low', this)">Low → High</button>
+  <button onclick="sortPrice('high', this)">High → Low</button>
+    <button onclick="filterByPrice('0-500')">Below ₹500</button>
+    <button onclick="filterByPrice('500-1000')">₹500 – ₹1000</button>
+    <button onclick="filterByPrice('1000-2000')">₹1000 – ₹2000</button>
+    <button onclick="filterByPrice('2000+')">Above ₹2000</button>
+    <button onclick="filterCategory('All')">Reset Filters</button>
+  </div>
+</div>
+
+
+  <!-- PRODUCTS -->
+  <div class="products" id="productList"></div>
+
+</div>
+
+<script type="module" src="js/firebase.js"></script>
+<script type="module" src="js/app.js"></script>
+<script type="module" src="js/auth.js"></script>
+<script>
+  function setActive(btn) {
+    document.querySelectorAll(".cat-btn").forEach(b => {
+      b.classList.remove("active");
+    });
+    btn.classList.add("active");
+  }
+</script>
+
+</body>
+</html>
